@@ -179,6 +179,11 @@ namespace NurxPlugin
             // Make sure the session is authenticated.
             if (_authSessions.Contains(session))
             {
+                // Don't try to interact with NecroBot if the profile hasn't
+                // even loaded yet.
+                if (_pogoSession.Profile == null)
+                    return;
+
                 try
                 {
                     NurxCommand cmd = JsonConvert.DeserializeObject<NurxCommand>(message);

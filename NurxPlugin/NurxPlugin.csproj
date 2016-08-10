@@ -34,21 +34,9 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NecroBot">
-      <HintPath>..\..\NecroBot\PoGo.NecroBot.CLI\bin\x86\Debug\NecroBot.exe</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="PoGo.NecroBot.Logic">
-      <HintPath>..\..\NecroBot\PoGo.NecroBot.Logic\bin\x86\Debug\PoGo.NecroBot.Logic.dll</HintPath>
-    </Reference>
-    <Reference Include="POGOProtos">
-      <HintPath>..\..\NecroBot\PoGo.NecroBot.Logic\bin\x86\Debug\POGOProtos.dll</HintPath>
-    </Reference>
-    <Reference Include="Pokemon.Go.Rocket.API">
-      <HintPath>..\..\NecroBot\PoGo.NecroBot.Logic\bin\x86\Debug\Pokemon.Go.Rocket.API.dll</HintPath>
     </Reference>
     <Reference Include="SuperSocket.Common, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
       <HintPath>..\packages\SuperSocket.1.6.6.1\lib\net45\SuperSocket.Common.dll</HintPath>
@@ -95,7 +83,28 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NecroBot-devel\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
+      <Project>{05d2da44-1b8e-4cf7-94ed-4d52451cd095}</Project>
+      <Name>PokemonGo.RocketAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NecroBot-devel\PoGo.NecroBot.CLI\PoGo.NecroBot.CLI.csproj">
+      <Project>{1fea147e-f704-497b-a538-00b053b5f672}</Project>
+      <Name>PoGo.NecroBot.CLI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NecroBot-devel\PoGo.NecroBot.Logic\PoGo.NecroBot.Logic.csproj">
+      <Project>{0739e40d-c589-4aeb-93e5-ee8cd6773c60}</Project>
+      <Name>PoGo.NecroBot.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NecroBot-devel\POGOProtos\POGOProtos\POGOProtos.csproj">
+      <Project>{a03a7bb2-4f0b-467b-84b2-9a76e6aae6fb}</Project>
+      <Name>POGOProtos</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetName).dll" "$(SolutionDir)PoGo.NecroBot.CLI\bin\Debug\Plugins\$(TargetName).dll"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
